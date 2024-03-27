@@ -47,41 +47,41 @@
       </div>
     </div>
     <script>
-      let startTime;
-      let timerInterval;
-      const startBtn = document.getElementById("startBtn");
-      const stopBtn = document.getElementById("stopBtn");
-      const numPeopleInput = document.getElementById("numPeople");
-      const hourlyRateInput = document.getElementById("hourlyRate");
-      const timeSpentOutput = document.getElementById("timeSpent");
-      const dollarsSpentOutput = document.getElementById("dollarsSpent");
-      debugger;
-      startBtn.addEventListener("click", startMeeting);
-      stopBtn.addEventListener("click", stopMeeting);
+      let startTime
+      let timerInterval
+      const startBtn = document.getElementById('startBtn')
+      const stopBtn = document.getElementById('stopBtn')
+      const numPeopleInput = document.getElementById('numPeople')
+      const hourlyRateInput = document.getElementById('hourlyRate')
+      const timeSpentOutput = document.getElementById('timeSpent')
+      const dollarsSpentOutput = document.getElementById('dollarsSpent')
+      debugger
+      startBtn.addEventListener('click', startMeeting)
+      stopBtn.addEventListener('click', stopMeeting)
       function startMeeting() {
-        startTime = new Date().getTime();
-        timerInterval = setInterval(updateTimeAndCost, 1000);
-        startBtn.disabled = true;
-        stopBtn.disabled = false;
+        startTime = new Date().getTime()
+        timerInterval = setInterval(updateTimeAndCost, 1000)
+        startBtn.disabled = true
+        stopBtn.disabled = false
       }
       function stopMeeting() {
-        clearInterval(timerInterval);
-        startBtn.disabled = false;
-        stopBtn.disabled = true;
+        clearInterval(timerInterval)
+        startBtn.disabled = false
+        stopBtn.disabled = true
       }
       function updateTimeAndCost() {
-        const elapsedTime = (new Date().getTime() - startTime) / 1000;
-        const numPeople = parseInt(numPeopleInput.value);
-        const hourlyRate = parseFloat(hourlyRateInput.value);
-        const hoursSpent = Math.floor(elapsedTime / 3600);
-        const minutesSpent = Math.floor((elapsedTime % 3600) / 60);
-        const secondsSpent = Math.floor(elapsedTime % 60);
+        const elapsedTime = (new Date().getTime() - startTime) / 1000
+        const numPeople = parseInt(numPeopleInput.value)
+        const hourlyRate = parseFloat(hourlyRateInput.value)
+        const hoursSpent = Math.floor(elapsedTime / 3600)
+        const minutesSpent = Math.floor((elapsedTime % 3600) / 60)
+        const secondsSpent = Math.floor(elapsedTime % 60)
         const timeString = `${hoursSpent}:${
-          minutesSpent < 10 ? "0" : ""
-        }${minutesSpent}:${secondsSpent < 10 ? "0" : ""}${secondsSpent}`;
-        const dollarsSpent = (elapsedTime / 3600) * numPeople * hourlyRate;
-        timeSpentOutput.textContent = timeString;
-        dollarsSpentOutput.textContent = dollarsSpent.toFixed(2);
+          minutesSpent < 10 ? '0' : ''
+        }${minutesSpent}:${secondsSpent < 10 ? '0' : ''}${secondsSpent}`
+        const dollarsSpent = (elapsedTime / 3600) * numPeople * hourlyRate
+        timeSpentOutput.textContent = timeString
+        dollarsSpentOutput.textContent = dollarsSpent.toFixed(2)
       }
     </script>
   </body>
