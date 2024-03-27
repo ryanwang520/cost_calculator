@@ -1,88 +1,88 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset=UTF-8"> <meta name=viewport content=width=device-width,
+    initial-scale=1.0">
+    <title>Meeting Cost Calculator</title>
+    <style>
+      .container {
+        max-width: 400px;
+        margin: 0 auto;
+        text-align: center;
+      }
 
-<head>
-	<meta charset=UTF-8">
-	<meta name=viewport content=width=device-width, initial-scale=1.0">
-	<title>Meeting Cost Calculator</title>
-	<style>
-		.container {
-			max-width: 400px;
-			margin: 0 auto;
-			text-align: center;
-		}
+      .form-group {
+        margin-bottom: 1em;
+      }
 
-		.form-group {
-			margin-bottom: 1em;
-		}
+      #result {
+        margin-top: 2em;
+      }
 
-		#result {
-			margin-top: 2em;
-		}
+      #result p {
+        margin-bottom: 0.5em;
+      }
+    </style>
+  </head>
 
-		#result p {
-			margin-bottom: 0.5em;
-		}
-	</style>
-</head>
-
-<body>
-	<div class="container">
-		<h1>Meeting Cost Calculator</h1>
-		<div id="meetingForm">
-			<div class="form-group">
-				<label for="numPeople">Number of People:</label>
-				<input type=number id=numPeople name=numPeople min=1" required>
-			</div>
-			<div class="form-group">
-				<label for="hourlyRate">Hourly Rate ($/hour):</label>
-				<input type=number id=hourlyRate name=hourlyRate min=0.01" step=0.01 required>
-			</div>
-			<button type="button" id="startBtn">Start</button>
-			<button type="button" id="stopBtn">Stop</button>
-		</div>
-		<div id="result">
-			<p>Time spent: <span id="timeSpent">0:00</span></p>
-			<p>Dollars spent: $<span id="dollarsSpent">0.00</span></p>
-		</div>
-	</div>
-	<script>
-		let startTime;
-		let timerInterval;
-		const startBtn = document.getElementById("startBtn");
-		const stopBtn = document.getElementById("stopBtn");
-		const numPeopleInput = document.getElementById("numPeople");
-		const hourlyRateInput = document.getElementById("hourlyRate");
-		const timeSpentOutput = document.getElementById("timeSpent");
-		const dollarsSpentOutput = document.getElementById("dollarsSpent");
-		debugger;
-		startBtn.addEventListener("click", startMeeting);
-		stopBtn.addEventListener("click", stopMeeting);
-		function startMeeting() {
-			startTime = new Date().getTime();
-			timerInterval = setInterval(updateTimeAndCost, 1000);
-			startBtn.disabled = true;
-			stopBtn.disabled = false;
-		}
-		function stopMeeting() {
-			clearInterval(timerInterval);
-			startBtn.disabled = false;
-			stopBtn.disabled = true;
-		}
-		function updateTimeAndCost() {
-			const elapsedTime = (new Date().getTime() - startTime) / 1000;
-			const numPeople = parseInt(numPeopleInput.value);
-			const hourlyRate = parseFloat(hourlyRateInput.value);
-			const hoursSpent = Math.floor(elapsedTime / 3600);
-			const minutesSpent = Math.floor((elapsedTime % 3600) / 60);
-			const secondsSpent = Math.floor(elapsedTime % 60);
-			const timeString = `${hoursSpent}:${minutesSpent < 10 ? "0" : ""
-				}${minutesSpent}:${secondsSpent < 10 ? "0" : ""}${secondsSpent}`;
-			const dollarsSpent = (elapsedTime / 3600) * numPeople * hourlyRate;
-			timeSpentOutput.textContent = timeString;
-			dollarsSpentOutput.textContent = dollarsSpent.toFixed(2);
-		}
-	</script>
-</body>
-
+  <body>
+    <div class="container">
+      <h1>Meeting Cost Calculator</h1>
+      <div id="meetingForm">
+        <div class="form-group">
+          <label for="numPeople">Number of People:</label>
+          <input type=number id=numPeople name=numPeople min=1" required>
+        </div>
+        <div class="form-group">
+          <label for="hourlyRate">Hourly Rate ($/hour):</label>
+          <input type=number id=hourlyRate name=hourlyRate min=0.01" step=0.01
+          required>
+        </div>
+        <button type="button" id="startBtn">Start</button>
+        <button type="button" id="stopBtn">Stop</button>
+      </div>
+      <div id="result">
+        <p>Time spent: <span id="timeSpent">0:00</span></p>
+        <p>Dollars spent: $<span id="dollarsSpent">0.00</span></p>
+      </div>
+    </div>
+    <script>
+      let startTime;
+      let timerInterval;
+      const startBtn = document.getElementById("startBtn");
+      const stopBtn = document.getElementById("stopBtn");
+      const numPeopleInput = document.getElementById("numPeople");
+      const hourlyRateInput = document.getElementById("hourlyRate");
+      const timeSpentOutput = document.getElementById("timeSpent");
+      const dollarsSpentOutput = document.getElementById("dollarsSpent");
+      debugger;
+      startBtn.addEventListener("click", startMeeting);
+      stopBtn.addEventListener("click", stopMeeting);
+      function startMeeting() {
+        startTime = new Date().getTime();
+        timerInterval = setInterval(updateTimeAndCost, 1000);
+        startBtn.disabled = true;
+        stopBtn.disabled = false;
+      }
+      function stopMeeting() {
+        clearInterval(timerInterval);
+        startBtn.disabled = false;
+        stopBtn.disabled = true;
+      }
+      function updateTimeAndCost() {
+        const elapsedTime = (new Date().getTime() - startTime) / 1000;
+        const numPeople = parseInt(numPeopleInput.value);
+        const hourlyRate = parseFloat(hourlyRateInput.value);
+        const hoursSpent = Math.floor(elapsedTime / 3600);
+        const minutesSpent = Math.floor((elapsedTime % 3600) / 60);
+        const secondsSpent = Math.floor(elapsedTime % 60);
+        const timeString = `${hoursSpent}:${
+          minutesSpent < 10 ? "0" : ""
+        }${minutesSpent}:${secondsSpent < 10 ? "0" : ""}${secondsSpent}`;
+        const dollarsSpent = (elapsedTime / 3600) * numPeople * hourlyRate;
+        timeSpentOutput.textContent = timeString;
+        dollarsSpentOutput.textContent = dollarsSpent.toFixed(2);
+      }
+    </script>
+  </body>
 </html>
